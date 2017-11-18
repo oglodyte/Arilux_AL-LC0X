@@ -67,7 +67,7 @@ char   ARILUX_MQTT_STATUS_TOPIC[44];
 char msgBuffer[32];
 char outgoingJsonBuffer[120];
 
-char friendlyName[32];
+char friendlyName[48];
 char configBuf[512];
 #ifdef HOME_ASSISTANT_MQTT_DISCOVERY
   StaticJsonBuffer<512> HOME_ASSISTANT_MQTT_DISCOVERY_CONFIG;
@@ -796,9 +796,10 @@ void handleRFRemote(void) {
         DEBUG_PRINTLN(F("INFO: ARILUX_RF_CODE_KEY_MODE_MINUS"));
         break;
       default:
-        DEBUG_PRINTLN(F("ERROR: RF code not defined"));
+        DEBUG_PRINT(F("ERROR: RF code not defined: "));
         break;
     }
+    DEBUG_PRINTLN_WITH_FMT(value, DEC);
     rcSwitch.resetAvailable();
   }
 }
@@ -938,6 +939,8 @@ void setup() {
 #endif
 
 #ifdef RF_REMOTE
+  pinMode(2, OUTPUT); 
+  digitalWrite(13, LOW); // try to enable RF
   // Start the RF receiver
   rcSwitch.enableReceive(ARILUX_RF_PIN);
 #endif
