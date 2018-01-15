@@ -539,7 +539,7 @@ void connectMQTT(void) {
         DEBUG_PRINTLN(MQTT_PASS);
         DEBUG_PRINT(F("Broker: "));
         DEBUG_PRINTLN(MQTT_SERVER);
-        flashSuccess(false);
+//        flashSuccess(false);
       }
 
 #ifdef JSON
